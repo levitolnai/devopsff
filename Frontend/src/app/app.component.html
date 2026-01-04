@@ -1,0 +1,76 @@
+<div class="container">
+  <header>
+    <h1>🎲 {{ title }}</h1>
+    <p class="subtitle">Add names and draw randomly</p>
+  </header>
+
+  <!-- Error Message -->
+  <div class="error-message" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <!-- Add Name Section -->
+  <div class="add-section">
+    <h2>Add New Name</h2>
+    <div class="input-group">
+      <input 
+        type="text" 
+        [(ngModel)]="newName" 
+        (keyup.enter)="addName()"
+        placeholder="Enter a name..."
+        [disabled]="loading"
+      />
+      <button (click)="addName()" [disabled]="loading || !newName.trim()">
+        Add Name
+      </button>
+    </div>
+  </div>
+
+  <!-- Draw Random Section -->
+  <div class="draw-section">
+    <button 
+      class="draw-button" 
+      (click)="drawRandom()" 
+      [disabled]="loading || names.length === 0"
+    >
+      🎯 Draw Random Name
+    </button>
+
+    <div class="drawn-name" *ngIf="drawnName">
+      <h3>Winner:</h3>
+      <div class="drawn-name-display">
+        {{ drawnName.fullName }}
+      </div>
+      <button class="clear-button" (click)="clearDrawnName()">Clear</button>
+    </div>
+  </div>
+
+  <!-- Names List Section -->
+  <div class="names-section">
+    <div class="names-header">
+      <h2>All Names ({{ names.length }})</h2>
+      <button 
+        class="delete-all-button" 
+        (click)="deleteAllNames()" 
+        [disabled]="loading || names.length === 0"
+      >
+        Delete All
+      </button>
+    </div>
+
+    <div class="loading" *ngIf="loading">Loading...</div>
+
+    <div class="names-list" *ngIf="!loading && names.length > 0">
+      <div class="name-item" *ngFor="let name of names">
+        <span class="name-text">{{ name.fullName }}</span>
+        <button class="delete-button" (click)="deleteName(name.id)" [disabled]="loading">
+          ❌
+        </button>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="!loading && names.length === 0">
+      <p>No names added yet. Add your first name above!</p>
+    </div>
+  </div>
+</div>
