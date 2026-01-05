@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Name, AddNameRequest } from '../models/name.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class NameService {
   private apiUrl = 'http://localhost:5000/api/names';
 
