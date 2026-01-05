@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +18,13 @@ import { ConfigService } from './services/config.service';
   ],
   providers: [
     NameService,
-    ConfigService
+    ConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (cfg: ConfigService) => () => cfg.load(),
+      deps: [ConfigService],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
