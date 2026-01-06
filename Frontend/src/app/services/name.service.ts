@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Name, AddNameRequest } from '../models/name.model';
+import { ConfigService } from './config.service';
 
 @Injectable()
 export class NameService {
-  private apiUrl = 'http://localhost:5000/api/names';
+  private get apiUrl(): string {
+    return `${this.configService.cfg.backendUrl}/api/names`;
+  }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private configService: ConfigService) { }
 
   getAllNames(): Observable<Name[]> {
     return this.http.get<Name[]>(this.apiUrl);
