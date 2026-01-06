@@ -10,7 +10,7 @@ jobs:
 
     env:
       # --- ÁLLÍTHATÓ ---
-      PROJECT_PATH: Backend/IssueTracker/NameDrawer.Api.csproj
+      PROJECT_PATH: Backend/NameDrawer.Api.csproj
       PUBLISH_DIR: publish
       RUNTIME: linux-x64
       SELF_CONTAINED: "true"
