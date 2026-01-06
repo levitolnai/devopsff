@@ -1,18 +1,18 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { Config } from './config';
 
 @Injectable()
 export class ConfigService {
   public cfg: Config = new Config();
 
-  constructor(private http: HttpClient) {}
-
-  load() {
-    return this.http.get<Config>('config.json', { headers: { 'Cache-Control': 'no-cache' } }).pipe(tap(t => {
-      this.cfg = t;
-    }));
+  constructor() {
+    // Közvetlenül environment.ts értékei
+    this.cfg.backendUrl = environment.backendUrl;
   }
 
+  load(): Promise<void> {
+    // APP_INITIALIZER-hez kell, visszatér egy resolved Promise-szal
+    return Promise.resolve();
+  }
 }
