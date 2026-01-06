@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Name, AddNameRequest } from '../models/name.model';
-import { ConfigService } from './config.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class NameService {
   private get apiUrl(): string {
-    return `${this.configService.cfg.backendUrl}/api/names`;
+    return `${environment.backendUrl}/api/names`;
   }
 
-  constructor(private http: HttpClient, private configService: ConfigService) { }
+  constructor(private http: HttpClient) { }
 
   getAllNames(): Observable<Name[]> {
     return this.http.get<Name[]>(this.apiUrl);
