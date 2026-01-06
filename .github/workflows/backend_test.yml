@@ -17,7 +17,7 @@ jobs:
       REMOTE_BASE: /var/backend_test
       REMOTE_RELEASES: /var/backend_test/releases
       REMOTE_CURRENT: /var/backend_test/current
-      SERVICE_NAME: issuetrackerbackend_test
+      SERVICE_NAME: namebackend_test
       FRONTEND_URL: https://test.d8m7q2.hu
       SSH_HOST: test.d8m7q2.hu
       SSH_USER: root
